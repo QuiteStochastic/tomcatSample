@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-javac -cp ~/.m2/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar HelloWorld.java
+#javac -cp ~/.m2/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar HelloWorld.java
+
+mvn clean package
 
 docker build -t tomcat_sample .
 
