@@ -14,7 +14,7 @@ import Model.PersonDAO;
 import Model.Pojo.Person;
 import com.mongodb.MongoClient;
 
-public class AddPerson extends HttpServlet {
+public class AddPersonServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,8 +24,7 @@ public class AddPerson extends HttpServlet {
         if ((name == null || name.equals(""))|| (country == null || country.equals(""))) {
 
             request.setAttribute("error", "Mandatory Parameters Missing");
-            RequestDispatcher rd = getServletContext().getRequestDispatcher(
-                    "/persons.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/persons.jsp");
             rd.forward(request, response);
         }
         else {

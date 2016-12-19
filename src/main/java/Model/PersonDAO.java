@@ -21,7 +21,7 @@ public class PersonDAO {
     private DBCollection col;
 
     public PersonDAO(MongoClient mongo) {
-        this.col = mongo.getDB("mongoTest").getCollection("Persons");
+        this.col = mongo.getDB("mongo").getCollection("Persons");
     }
 
     public Person createPerson(Person p) {

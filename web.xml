@@ -27,6 +27,10 @@
         Welcome to Tomcat
     </description>
 
+    <listener>
+        <listener-class>Model.MongoDBContextListener</listener-class>
+    </listener>
+
     <context-param>
         <param-name>MONGODB_HOST</param-name>
         <param-value>localhost</param-value>
@@ -35,6 +39,8 @@
         <param-name>MONGODB_PORT</param-name>
         <param-value>27017</param-value>
     </context-param>
+
+
 
     <servlet>
         <servlet-name>Controller.HelloWorld</servlet-name>
@@ -46,13 +52,32 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>Controller.AddPerson</servlet-name>
-        <servlet-class>Controller.AddPerson</servlet-class>
+        <servlet-name>Controller.AddPersonServlet</servlet-name>
+        <servlet-class>Controller.AddPersonServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Controller.AddPerson</servlet-name>
+        <servlet-name>Controller.AddPersonServlet</servlet-name>
         <url-pattern>/addPerson</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Controller.EditPersonServlet</servlet-name>
+        <servlet-class>Controller.EditPersonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Controller.EditPersonServlet</servlet-name>
+        <url-pattern>/editPerson</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Controller.DeletePersonServlet</servlet-name>
+        <servlet-class>Controller.DeletePersonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Controller.DeletePersonServlet</servlet-name>
+        <url-pattern>/deletePerson</url-pattern>
+    </servlet-mapping>
+
 
 
     <servlet>

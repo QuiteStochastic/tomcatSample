@@ -19,7 +19,6 @@ public class MainPage extends HttpServlet {
 
         response.setContentType("text/html");
 
-
         request.getRequestDispatcher("/WEB-INF/persons.jsp").forward(request, response);
     }
 
