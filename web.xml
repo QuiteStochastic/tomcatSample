@@ -37,13 +37,36 @@
     </context-param>
 
     <servlet>
-        <servlet-name>HelloWorld</servlet-name>
-        <servlet-class>HelloWorld</servlet-class>
+        <servlet-name>Controller.HelloWorld</servlet-name>
+        <servlet-class>Controller.HelloWorld</servlet-class>
     </servlet>
-
     <servlet-mapping>
-        <servlet-name>HelloWorld</servlet-name>
-        <url-pattern>/HelloWorld</url-pattern>
+        <servlet-name>Controller.HelloWorld</servlet-name>
+        <url-pattern>/helloWorld</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Controller.AddPerson</servlet-name>
+        <servlet-class>Controller.AddPerson</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Controller.AddPerson</servlet-name>
+        <url-pattern>/addPerson</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>Controller.MainPage</servlet-name>
+        <servlet-class>Controller.MainPage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Controller.MainPage</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+    <welcome-file-list>
+        <welcome-file></welcome-file>
+    </welcome-file-list>
 
 </web-app>
