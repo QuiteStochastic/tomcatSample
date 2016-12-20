@@ -8,4 +8,4 @@ mvn clean package
 
 #docker run -p 8080:8080 tomcat_sample
 
-docker-compose up
+#docker-compose up
