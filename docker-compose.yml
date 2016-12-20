@@ -3,8 +3,7 @@ version: '2'
 services:
   tomcat:
     #container_name: tomcat
-    build:
-      - context: .
+    build: .
     image: tomcat_sample
     ports:
       - "8080:8080"
