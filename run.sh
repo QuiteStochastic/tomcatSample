@@ -4,7 +4,7 @@
 
 mvn clean package
 
-docker build -t tomcat_sample .
+#docker build -t tomcat_sample .
 
 #docker run -p 8080:8080 tomcat_sample
 
