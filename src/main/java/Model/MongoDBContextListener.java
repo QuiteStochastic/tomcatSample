@@ -8,19 +8,25 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+
+import static java.lang.Integer.parseInt;
 
 public class MongoDBContextListener implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent sce) {
-        try {
-            ServletContext ctx = sce.getServletContext();
-            MongoClient mongo = new MongoClient(ctx.getInitParameter("MONGODB_HOST"),Integer.parseInt(ctx.getInitParameter("MONGODB_PORT")));
+        ServletContext ctx = sce.getServletContext();
+        String host=ctx.getInitParameter("MONGODB_HOST") +":"+ Integer.parseInt(ctx.getInitParameter("MONGODB_PORT"));
 
-            System.out.println("MongoClient initialized successfully");
-            sce.getServletContext().setAttribute("MONGO_CLIENT", mongo);
-        } catch (UnknownHostException e) {
-            throw new RuntimeException("MongoClient init failed");
-        }
+
+        MongoClientOptions mongoClientOptions= MongoClientOptions.builder().sslEnabled(true).build();
+
+
+        MongoClient mongo = new MongoClient(host,mongoClientOptions);
+
+        sce.getServletContext().setAttribute("MONGO_CLIENT", mongo);
+        System.out.println("MongoClient initialized successfully");
+
     }
 
 
