@@ -8,8 +8,19 @@ RUN mkdir -p "/usr/local/tomcat/webapps/ROOT/WEB-INF/lib"
 COPY ./target/TomcatSample-1.0-SNAPSHOT-jar-with-dependencies.jar /usr/local/tomcat/webapps/ROOT/WEB-INF/lib
 
 COPY ./tomcat.p12 /etc/ssl
-#COPY ./tomcat_cert.pem /etc/ssl
+COPY ./ca_cert.pem /etc/ssl
+COPY ./tomcat_cert.pem /etc/ssl
+COPY ./tomcat_key.pem /etc/ssl
 
-RUN $JAVA_HOME/bin/keytool -importkeystore -deststorepass changeit -destkeypass changeit -destkeystore $JAVA_HOME/lib/security/cacerts -srckeystore /etc/ssl/tomcat.p12 -srcstoretype PKCS12 -srcstorepass qwertyu
 
-#RUN cat /etc/ssl/tomcat_cert.pem > $JAVA_HOME/lib/security/cacerts
+
+RUN keytool -importkeystore -deststorepass changeit -destkeypass changeit -destkeystore /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts -srckeystore /etc/ssl/tomcat.p12 -srcstoretype PKCS12 -srcstorepass qwertyu -noprompt
+
+
+#RUN keytool -import -keystore /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts -deststorepass changeit -srckeystore /etc/ssl/tomcat.p12 -srcstoretype PKCS12 -srcstorepass qwertyu -noprompt
+
+
+
+#RUN keytool -import -trustcacerts -alias TEST_ROOT_CERT -file /etc/ssl/ca_cert.pem -keystore /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts -deststorepass changeit -noprompt
+
+#RUN keytool -import -alias TEST_TOMCAT_CERT -file /etc/ssl/tomcat_cert.pem -keystore /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts -deststorepass changeit -noprompt
