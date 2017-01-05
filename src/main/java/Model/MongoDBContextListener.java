@@ -1,16 +1,12 @@
 package Model;
 
 
-import java.net.UnknownHostException;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
-
-import static java.lang.Integer.parseInt;
 
 public class MongoDBContextListener implements ServletContextListener {
 

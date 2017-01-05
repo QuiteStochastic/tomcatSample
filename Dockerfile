@@ -14,13 +14,18 @@ COPY ./tomcat_key.pem /etc/ssl
 
 
 
-RUN keytool -importkeystore -deststorepass changeit -destkeypass changeit -destkeystore /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts -srckeystore /etc/ssl/tomcat.p12 -srcstoretype PKCS12 -srcstorepass qwertyu -noprompt
+RUN keytool -import -trustcacerts -alias TEST_ROOT_CERT -file /etc/ssl/ca_cert.pem -keystore /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts -deststorepass changeit -noprompt
+
+
+
+
+#RUN keytool -importkeystore -deststorepass changeit -destkeypass changeit -destkeystore /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts -srckeystore /etc/ssl/tomcat.p12 -srcstoretype PKCS12 -srcstorepass qwertyu -noprompt
 
 
 #RUN keytool -import -keystore /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts -deststorepass changeit -srckeystore /etc/ssl/tomcat.p12 -srcstoretype PKCS12 -srcstorepass qwertyu -noprompt
 
 
 
-#RUN keytool -import -trustcacerts -alias TEST_ROOT_CERT -file /etc/ssl/ca_cert.pem -keystore /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts -deststorepass changeit -noprompt
+
 
 #RUN keytool -import -alias TEST_TOMCAT_CERT -file /etc/ssl/tomcat_cert.pem -keystore /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts -deststorepass changeit -noprompt
