@@ -42,11 +42,24 @@
 
 
 
-    <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
-               maxThreads="150" scheme="https" secure="true"
-               clientAuth="false" sslProtocol="TLS"
-               keystoreFile="/etc/ssl/tomcat.p12"
-               keystorePass="qwertyu" />
+
+    <Connector SSLEnabled="true" acceptCount="100" clientAuth="false"
+               disableUploadTimeout="true" enableLookups="false" maxThreads="25"
+               port="8443" keystoreFile="/etc/ssl/tomcat.p12" keystorePass="qwertyu"
+               protocol="org.apache.coyote.http11.Http11NioProtocol" scheme="https"
+               secure="true" sslProtocol="TLS" />
+
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>tomcatSample</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
 
 
     <servlet>
