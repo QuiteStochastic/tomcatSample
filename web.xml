@@ -41,7 +41,13 @@
     </context-param>
 
 
-    <Connector port="8443" maxThreads="150" scheme="https" secure="true" SSLEnabled="true" keystoreFile="/etc/ssl/tomcat.p12" keystorePass="qwertyu" clientAuth="false" keyAlias="yourAlias" sslProtocol="TLS"/>
+
+    <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
+               maxThreads="150" scheme="https" secure="true"
+               clientAuth="false" sslProtocol="TLS"
+               keystoreFile="/etc/ssl/tomcat.p12"
+               keystorePass="qwertyu" />
+
 
     <servlet>
         <servlet-name>Controller.HelloWorld</servlet-name>
