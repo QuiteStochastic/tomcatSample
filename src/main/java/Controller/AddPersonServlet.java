@@ -24,7 +24,7 @@ public class AddPersonServlet extends HttpServlet {
         if ((name == null || name.equals(""))|| (country == null || country.equals(""))) {
 
             request.setAttribute("error", "Mandatory Parameters Missing");
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/persons.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/persons.jsp");
             rd.forward(request, response);
         }
         else {
@@ -40,7 +40,7 @@ public class AddPersonServlet extends HttpServlet {
             List<Person> persons = personDAO.readAllPerson();
             request.setAttribute("persons", persons);
 
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/persons.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/persons.jsp");
             rd.forward(request, response);
         }
     }

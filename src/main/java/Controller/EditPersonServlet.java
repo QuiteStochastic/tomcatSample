@@ -31,7 +31,7 @@ public class EditPersonServlet extends HttpServlet {
         List<Person> persons = personDAO.readAllPerson();
         request.setAttribute("persons", persons);
 
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/persons.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/persons.jsp");
         rd.forward(request, response);
     }
 
@@ -60,7 +60,7 @@ public class EditPersonServlet extends HttpServlet {
             request.setAttribute("persons", persons);
 
             RequestDispatcher rd = getServletContext().getRequestDispatcher(
-                    "/persons.jsp");
+                    "/WEB-INF/persons.jsp");
             rd.forward(request, response);
         } else {
             MongoClient mongo = (MongoClient) request.getServletContext()
@@ -77,7 +77,7 @@ public class EditPersonServlet extends HttpServlet {
             request.setAttribute("persons", persons);
 
             RequestDispatcher rd = getServletContext().getRequestDispatcher(
-                    "/persons.jsp");
+                    "/WEB-INF/persons.jsp");
             rd.forward(request, response);
         }
     }

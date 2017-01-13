@@ -33,7 +33,7 @@ public class DeletePersonServlet extends HttpServlet {
         List<Person> persons = personDAO.readAllPerson();
         request.setAttribute("persons", persons);
 
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/persons.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/persons.jsp");
         rd.forward(request, response);
     }
 
