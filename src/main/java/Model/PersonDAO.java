@@ -15,10 +15,10 @@ import java.util.List;
 //also take note of "_id" key for primary key
 public class PersonDAO {
 
-    private MongoCollection<Document> col;
+    private MongoCollection<Document> collection;
 
     public PersonDAO(MongoClient mongo) {
-        this.col = mongo.getDatabase("mongo").getCollection("Persons");
+        this.collection = mongo.getDatabase("mongo").getCollection("Persons");
     }
 
     public Person createPerson(Person p) {
@@ -26,59 +26,86 @@ public class PersonDAO {
         Gson gson=new Gson();
 
         Document doc=Document.parse(gson.toJson(p));
-        this.col.insertOne(doc);
+        this.collection.insertOne(doc);
         ObjectId id = (ObjectId) doc.get("_id");
         p.setId(id.toString());
         return p;
     }
 
-    public void updatePerson(Person p) {
+    public void updatePerson(Person newPerson) {
         //DBObject query = BasicDBObjectBuilder.start().append("_id", new ObjectId(p.getId())).get();
         Gson gson=new Gson();
 
 
+        ObjectId id = new ObjectId(newPerson.getId());//id should be the same as before
+
         Document q=new Document();
-        q.append("_id",p.getId());
+        q.append("_id",id);
 
+        newPerson.setId(null);//avoid parse errors
+        Document newDoc=Document.parse(gson.toJson(newPerson));
+        newDoc.append("_id",id);
 
-        this.col.updateOne(q, Document.parse(gson.toJson(p)));
+        System.out.println("newDoc: "+newDoc.toJson());
+        this.collection.findOneAndUpdate(q, newDoc);
+
     }
 
     public List<Person> readAllPerson() {
-        Gson gson=new Gson();
 
 
-        List<Person> data = new ArrayList<Person>();
 
-        for (Document doc :  col.find()) {
+        List<Person> personList = new ArrayList<Person>();
 
-            Person p = gson.fromJson(doc.toJson(),Person.class);
-            data.add(p);
+        for (Document doc :  collection.find()) {
+
+            Person p = convertDocToPerson(doc);
+
+            personList.add(p);
         }
-        return data;
+        return personList;
     }
+
 
     public void deletePerson(Person p) {
         //DBObject query = BasicDBObjectBuilder.start().append("_id", new ObjectId(p.getId())).get();
 
         Document q=new Document();
-        q.append("_id",p.getId());
+
+        ObjectId id = new ObjectId(p.getId());
+
+        q.append("_id",id);
 
 
-        this.col.deleteOne(q);
+        this.collection.deleteOne(q);
     }
 
     public Person readPerson(Person p) {
         //DBObject query = BasicDBObjectBuilder.start().append("_id", new ObjectId(p.getId())).get();
 
-        Gson gson=new Gson();
 
+        ObjectId id = new ObjectId(p.getId());
 
         Document q=new Document();
-        q.append("_id",p.getId());
+        q.append("_id",id);
 
-        Document data = this.col.find(q).first();
-        return gson.fromJson(data.toJson(),Person.class);
+        Document data = this.collection.find(q).first();
+
+        return convertDocToPerson(data);
+    }
+
+
+    private Person convertDocToPerson(Document doc) {
+
+        Gson gson=new Gson();
+
+        System.out.println("doc: "+doc.toJson());
+
+        Person p = gson.fromJson(doc.toJson(),Person.class);
+
+        ObjectId id = (ObjectId) doc.get("_id");
+        p.setId(id.toString());
+        return p;
     }
 
 }

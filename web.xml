@@ -41,36 +41,15 @@
     </context-param>
 
 
-
-
-    <!--<Connector SSLEnabled="true" acceptCount="100" clientAuth="false" maxThreads="200"-->
-               <!--port="8443" keystoreFile="/etc/ssl/tomcat.p12" keystorePass="qwertyu"-->
-               <!--protocol="org.apache.coyote.http11.Http11NioProtocol" scheme="https"-->
-               <!--secure="true" sslProtocol="TLS"-->
-               <!--maxHttpHeaderSize="65536"/>-->
-
-
-    <!--<Connector-->
-            <!--protocol="org.apache.coyote.http11.Http11AprProtocol"-->
-            <!--port="8443" maxThreads="200"-->
-            <!--scheme="https" secure="true" SSLEnabled="true"-->
-            <!--SSLCertificateFile="/etc/ssl/tomcat_cert.pem"-->
-            <!--SSLCertificateKeyFile="/etc/ssl/tomcat_key.pem"-->
-            <!--SSLVerifyClient="optional" SSLProtocol="TLSv1+TLSv1.1+TLSv1.2"/>-->
-
-    <!--<Listener className="org.apache.catalina.core.AprLifecycleListener"-->
-              <!--SSLEngine="on" SSLRandomSeed="builtin" />-->
-
-
-    <!--<security-constraint>-->
-        <!--<web-resource-collection>-->
-            <!--<web-resource-name>tomcatSample</web-resource-name>-->
-            <!--<url-pattern>/*</url-pattern>-->
-        <!--</web-resource-collection>-->
-        <!--<user-data-constraint>-->
-            <!--<transport-guarantee>CONFIDENTIAL</transport-guarantee>-->
-        <!--</user-data-constraint>-->
-    <!--</security-constraint>-->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>tomcatSample</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
 
 
 

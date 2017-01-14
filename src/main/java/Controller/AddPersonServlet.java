@@ -35,10 +35,17 @@ public class AddPersonServlet extends HttpServlet {
 
             PersonDAO personDAO = new PersonDAO(mongo);
             personDAO.createPerson(p);
+
             System.out.println("Person Added Successfully with id="+p.getId());
             request.setAttribute("success", "Person Added Successfully");
-            List<Person> persons = personDAO.readAllPerson();
-            request.setAttribute("persons", persons);
+
+
+            List<Person> personList = personDAO.readAllPerson();
+            request.setAttribute("persons", personList);
+
+/*            for (Person person:personList) {
+                System.out.println("ID: "+person.getId()+", name: "+person.getName());
+            }*/
 
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/persons.jsp");
             rd.forward(request, response);

@@ -13,6 +13,8 @@ COPY ./tomcat_cert.pem /etc/ssl
 COPY ./tomcat_key.pem /etc/ssl
 COPY ./tomcat_keystore.jks /etc/ssl
 
+COPY ./server.xml $CATALINA_HOME/conf
+
 
 #RUN touch $CATALINA_HOME/bin/setenv.sh;chmod 644 $CATALINA_HOME/bin/setenv.sh
 #RUN echo "CATALINA_OPTS=-Djavax.net.ssl.keyStoreType=pkcs12 -Djavax.net.ssl.keyStore=/etc/ssl/tomcat.p12 -Djavax.net.ssl.keyStorePassword=qwertyu" > $CATALINA_HOME/bin/setenv.sh
