@@ -1,6 +1,7 @@
 FROM tomcat:9.0.0.M15-jre8
 
 
+
 ##copy app server files and jars into the container
 COPY ./web.xml /usr/local/tomcat/webapps/ROOT/WEB-INF
 COPY ./src/main/resources/persons.jsp /usr/local/tomcat/webapps/ROOT/WEB-INF
@@ -24,5 +25,6 @@ COPY ./tomcat_key.pem /etc/ssl
 RUN touch $CATALINA_HOME/bin/setenv.sh;chmod 755 $CATALINA_HOME/bin/setenv.sh
 RUN echo "CATALINA_OPTS="-Djavax.net.ssl.keyStoreType=pkcs12"\ "-Djavax.net.ssl.keyStore=/etc/ssl/tomcat.p12"\ "-Djavax.net.ssl.keyStorePassword=qwertyu"" > $CATALINA_HOME/bin/setenv.sh
 
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
 
-RUN keytool -import -trustcacerts -alias TEST_ROOT_CERT -file /etc/ssl/ca_cert.pem -keystore /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts -deststorepass changeit -noprompt
+RUN $JAVA_HOME/bin/keytool -import -trustcacerts -alias TEST_ROOT_CERT -file /etc/ssl/ca_cert.pem -keystore $JAVA_HOME/lib/security/cacerts -deststorepass changeit -noprompt
