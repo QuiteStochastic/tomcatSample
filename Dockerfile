@@ -25,6 +25,7 @@ COPY ./tomcat_key.pem /etc/ssl
 RUN touch $CATALINA_HOME/bin/setenv.sh;chmod 755 $CATALINA_HOME/bin/setenv.sh
 RUN echo "CATALINA_OPTS="-Djavax.net.ssl.keyStoreType=pkcs12"\ "-Djavax.net.ssl.keyStore=/etc/ssl/tomcat.p12"\ "-Djavax.net.ssl.keyStorePassword=qwertyu"" > $CATALINA_HOME/bin/setenv.sh
 
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
+#ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
+ENV JAVA_HOME /usr/java/latest/jre
 
 RUN $JAVA_HOME/bin/keytool -import -trustcacerts -alias TEST_ROOT_CERT -file /etc/ssl/ca_cert.pem -keystore $JAVA_HOME/lib/security/cacerts -deststorepass changeit -noprompt

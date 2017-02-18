@@ -33,7 +33,7 @@
 
     <context-param>
         <param-name>MONGODB_HOST</param-name>
-        <param-value>localhost</param-value>
+        <param-value>tomcat_mongo_docker_mongo</param-value>
     </context-param>
     <context-param>
         <param-name>MONGODB_PORT</param-name>
